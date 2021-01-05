@@ -2,14 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zunhowchem.github.io</id>
     <title>Zunhow&apos;s Blog</title>
-    <updated>2020-11-26T14:36:32.414Z</updated>
+    <updated>2021-01-05T07:51:29.635Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zunhowchem.github.io"/>
     <link rel="self" href="https://zunhowchem.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://zunhowchem.github.io/images/avatar.png</logo>
     <icon>https://zunhowchem.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Zunhow&apos;s Blog</rights>
+    <rights>All rights reserved 2021, Zunhow&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[GROMACS建模常用命令]]></title>
+        <id>https://zunhowchem.github.io/post/gromacs-jian-mo-chang-yong-ming-ling/</id>
+        <link href="https://zunhowchem.github.io/post/gromacs-jian-mo-chang-yong-ming-ling/">
+        </link>
+        <updated>2021-01-04T14:01:10.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>   由于近期在构建分子动力学模型时经常翻教程查找命令从而耽误不少时间，故将建模常用命令总结与此，也会更新学会的新的命令。
+   gmx editconf : 此命令是将其他化学结构的格式转化为GROMACS可识别的.gro，.g96，.pdb。
+   gmx editconf  [-f [&lt;.gro/.g96/...&gt;]] [-n [&lt;.ndx&gt;]] [-o [&lt;.gro/.g96/...&gt;]]  [-box &lt;vector&gt;] [-center &lt;vector&gt;]
+   [-f [&lt;.gro/.g96/...&gt;]] 结构文件：gro g96 pdb tpr
+   [-n [&lt;.ndx&gt;]] （可选）：索引文件
+   [-o [&lt;.gro/.g96/...&gt;]]（可选）：输出结构文件gro g96 pdb
+   [-box &lt;vector&gt;]（0 0 0）：盒子边长(a,b,c)
+   [-center &lt;vector&gt;]（0 0 0）：将几何中心移动到(x,y,z)
+
+    gmx insert-molecules：此命令用于在已有的-ci结构中插入指定的-f系统中的空白空间中，或者-box给定一个空盒，再放入-ci结构。
+   gmx insert-molecules [-f [&lt;.gro/.g96/...&gt;]] [-ci [&lt;.gro/.g96/...&gt;]]  [-n [&lt;.ndx&gt;]] [-o [&lt;.gro/.g96/...&gt;]]  [-nmol &lt;int&gt;] [-box &lt;vector&gt;]
+   [-f [&lt;.gro/.g96/...&gt;]] 要插入的现有结构：gro g96 pdb tpr
+   [-ci [&lt;.gro/.g96/...&gt;]]插入的结构：gro g96 pdb tpr
+   [-n [&lt;.ndx&gt;]] （可选）：现有的索引文件
+   [-o [&lt;.gro/.g96/...&gt;]]（可选）：输出结构文件gro g96 pdb
+   [-nmol &lt;int&gt;]：需要插入的分子数
+   [-box &lt;vector&gt;]（0 0 0）：盒子边长（nm）
+
+   gmx solvate能解决2个问题：
+   （1）创造一个溶剂盒子。尤其是-cs和-box，或者使用结构文件通过-cs和-cp。
+   （2）解决溶剂配置。例如在溶剂中运动的蛋白质，指定-cp（溶质）和-cs（溶剂）。除非设置了-box，否则将使用在溶质坐标文件（-cp）中指定的盒子。
+   gmx solvate [-cp [&lt;.gro/.g96/...&gt;]] [-cs [&lt;.gro/.g96/...&gt;]] [-p [&lt;.top&gt;]] [-o [&lt;.gro/.g96/...&gt;]] [-box &lt;vector&gt;]
+   [-cp [&lt;.gro/.g96/...&gt;]] 结构文件（溶质）：gro g96 pdb tpr
+   [-cs [&lt;.gro/.g96/...&gt;]] 结构文件（溶剂）：gro g96 pdb tpr
+   [-p [&lt;.top&gt;]] 拓扑文件：top
+   [-o [&lt;.gro/.g96/...&gt;]]（可选）：输出结构文件gro g96 pdb
+   [-box &lt;vector&gt;] ：盒子边长（nm）
+
+   gmx genion：使用单原子离子随机取代溶剂分子。
+   gmx genion [-s [&lt;.tpr&gt;]] [-n [&lt;.ndx&gt;]] [-p [&lt;.top&gt;]] [-o [&lt;.gro/.g96/...&gt;]] [-np &lt;int&gt;] [-pname &lt;string&gt;] [-pq &lt;int&gt;] [-nn &lt;int&gt;] [-nname &lt;string&gt;] [-nq &lt;int&gt;]  [-[no]neutral]
+   [-s [&lt;.tpr&gt;]] ：合理的xdr运行输入文件
+   [-n [&lt;.ndx&gt;]] （可选）：现有的索引文件
+   [-p [&lt;.top&gt;]] 拓扑文件：top
+   [-o [&lt;.gro/.g96/...&gt;]] ：输出结构文件gro g96 pdb
+   [-np &lt;int&gt;]（0）：阳离子个数
+   [-pname &lt;string&gt;]（NA）：阳离子名称
+   [-pq &lt;int&gt;]（1）：阳离子电荷数
+   [-nn &lt;int&gt;]（0）：阴离子个数
+   [-nname &lt;string&gt;]（CL）：阴离子名称
+   [-nq &lt;int&gt;]（-1）：阴离子电荷数
+    [-[no]neutral] ：加入适量的单原子离子使系统呈电中性
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://zunhowchem.github.io/post/hello-gridea/</id>
