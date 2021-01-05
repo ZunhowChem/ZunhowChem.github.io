@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
-<title>Zunhow&#39;s Blog</title>
+<title>CGenFF产生小分子CHARMM力场拓扑文件 | Zunhow&#39;s Blog</title>
 <link rel="shortcut icon" href="https://zunhowchem.github.io/favicon.ico?v=1609838124883">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link rel="stylesheet" href="https://zunhowchem.github.io/styles/main.css" type='text/css' media='all'>
@@ -18,7 +18,7 @@
 
 
 </head>
-<body class="post-template-default single single-post single-format-standard ct-body singular singular-post not-front standard">
+<body class="home blog ct-body standard">
 <div id="overflow-container" class="overflow-container">
   <a class="skip-content" href="#main">Skip to content</a>
   <header id="site-header" class="site-header" role="banner">
@@ -115,13 +115,130 @@
 
 </header>
 
+
   <div id="main" class="main" role="main">
-    <div class="main-content">
-      <div class="tags-container">
+    <div id="loop-container" class="loop-container">
+      <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-design tag-standard-2 tag-tagalicious tag-travel entry full-without-featured odd excerpt-1">
         
-          <a class="tag" href="https://zunhowchem.github.io/tag/JYNGlCPyE/">GROMACS</a>
+          <div class='featured-image lazy lazy-bg-image' data-background="https://zunhowchem.github.io/post-images/2.jpg">
+          </div>
         
+
+        <div class="entry-meta">
+          <span class="date">· 2021-01-05 ·</span> <span> / </span>
+          <span class="author">
+            <a href="https://zunhowchem.github.io" title="" rel="author"> Powered by Zunhow</a>
+          </span>
+          
+            <span class="category">
+                    <span> / </span>
+                    <a href="https://zunhowchem.github.io/tag/JYNGlCPyE/">GROMACS</a>
+                </span>
+          
+        </div>
+        <div class='entry-header'>
+          <h1 class='entry-title'>CGenFF产生小分子CHARMM力场拓扑文件</h1>
+        </div>
+        <div class="entry-container">
+          <div class="entry-content">
+            <article>
+              <pre><code>   分子动力学模拟中力场的质量决定了计算结果是否合理，本文通过介绍CGenFF工具生成小分子的拓扑文件。
+</code></pre>
+<!-- more -->
+<h2 id="需要准备的工具">需要准备的工具</h2>
+<pre><code>   **CGenFF主页**：https://cgenff.umaryland.edu/ 需要注册用户，用户一周能上传150个分子结构进行拓扑文件的产生，分子内最大原子数不超过384。需要准备mol2格式文件。
+   **Open Babel 2.3.0** ：一个用于化学结构文件类型相互转换的软件。
+   **CHARMM36力场文件**  [CHARMM主页](http://mackerell.umaryland.edu/charmm_ff.shtml)  [CHARMM下载 ](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+   Python 2.x 或 Python 3.x
+   NetworkX 1.11 或 NetworkX 2.3
+   转换文件
+   [cgenff_charmm2gmx_py2_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py2.py) Python 2.x, NetworkX 1.11
+   [cgenff_charmm2gmx_py3_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx1.py) Python 3.x, NetworkX 1.11
+   [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
+</code></pre>
+<h2 id="使用方法">使用方法</h2>
+<h1 id="制作cgenff可识别的str文件">制作CGenFF可识别的.str文件</h1>
+<pre><code>   - 制作.mol2格式的坐标文件，氢原子也包含在内。最好使用Open Babel软件进行转换。
+   - 在CGenFF网站上传.mol2文件，此处有三个复选框：
+      Guess bond orders from connectivity
+      Include parameters that are already in CGenFF
+      Use CGenFF legacy v1.0
+    一般情况下都不用选。选项意义如字面所言。选项一重新判断键价，有一定概率出错，如果时用于其他软件的拓扑，不用选择。选项二会将原力场中已包含的信息一并列出，在后续格式转换的过程中可能会出现重复。
+</code></pre>
+<p>.str文件中会有一个penalty值，该值小于10表明结果较好，在10到50之间则说明需要进行一定的验证，大于50则需要更广泛的验证。</p>
+<h2 id="转换为gromacs格式">转换为GROMACS格式</h2>
+<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+     程序运行命令为
+     `python cgenff_charmm2gmx_py3_nx2.py RESNAME *.mol2 *.str charmm.ff`
+     **RESNAME** 为残基名称，在 .str 文件中见“XXX 0.000!”字段中的XXX
+     *.mol2 为 .mol2 文件
+     *.str 为 .str 文件
+     charmm36 为立场文件夹名称
+</code></pre>
+
+            </article>
+          </div>
+          <div class='entry-meta-bottom'>
+            <div class="entry-categories">
+              <p>
+                <span>Categories</span>
+                
+                  
+                    
+                  <a href="https://zunhowchem.github.io/tag/JYNGlCPyE/" title="View all posts in GROMACS">GROMACS</a>
+                    
+                    
+              </p>
+            </div>
+            <div class="entry-tags">
+              <p><span>Tags</span>
+              </p>
+            </div>
+          </div>
+          <div class="author-meta">
+            <div class="author">
+              <img alt='' src="https://zunhowchem.github.io/images/avatar.png?v=1609838124883" class='avatar avatar-72 photo' height='72' width='72'>
+              <span>WRITTEN BY: &nbsp;&nbsp;&nbsp;<a href='https://zunhowchem.github.io'></a> </span>
+            </div>
+            <div class="bio">
+              <p></p>
+              
+                
+              
+                
+              
+                
+                  <a class="weibo" target="_blank"
+                     href="https://weibo.com/u/1631750203">
+                    <i class="fab fa-weibo" title="weibo"></i>
+                  </a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            </div>
+          </div>
+        </div>
+          
+            <nav class="navigation pagination" role="navigation">
+              <h2 class="screen-reader-text">Posts navigation</h2>
+              <div class="nav-links">
+                <a class="next page-numbers" href="https://zunhowchem.github.io/post/1/">下一篇->GROMACS建模常用命令</a>
+              </div>
+            </nav>
+          
       </div>
+      <section id="comments" class="comments">
+        
+      </section>
     </div>
   </div>
   <footer id="site-footer" class="site-footer" role="contentinfo">
@@ -175,5 +292,4 @@
 </div>
 </body>
 </html>
-
 

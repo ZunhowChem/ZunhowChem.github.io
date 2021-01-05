@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zunhowchem.github.io</id>
     <title>Zunhow&apos;s Blog</title>
-    <updated>2021-01-05T07:53:07.627Z</updated>
+    <updated>2021-01-05T09:15:29.452Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zunhowchem.github.io"/>
     <link rel="self" href="https://zunhowchem.github.io/atom.xml"/>
@@ -11,9 +11,53 @@
     <icon>https://zunhowchem.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Zunhow&apos;s Blog</rights>
     <entry>
+        <title type="html"><![CDATA[CGenFF产生小分子CHARMM力场拓扑文件]]></title>
+        <id>https://zunhowchem.github.io/post/2/</id>
+        <link href="https://zunhowchem.github.io/post/2/">
+        </link>
+        <updated>2021-01-05T08:08:06.000Z</updated>
+        <summary type="html"><![CDATA[<pre><code>   分子动力学模拟中力场的质量决定了计算结果是否合理，本文通过介绍CGenFF工具生成小分子的拓扑文件。
+</code></pre>
+]]></summary>
+        <content type="html"><![CDATA[<pre><code>   分子动力学模拟中力场的质量决定了计算结果是否合理，本文通过介绍CGenFF工具生成小分子的拓扑文件。
+</code></pre>
+<!-- more -->
+<h2 id="需要准备的工具">需要准备的工具</h2>
+<pre><code>   **CGenFF主页**：https://cgenff.umaryland.edu/ 需要注册用户，用户一周能上传150个分子结构进行拓扑文件的产生，分子内最大原子数不超过384。需要准备mol2格式文件。
+   **Open Babel 2.3.0** ：一个用于化学结构文件类型相互转换的软件。
+   **CHARMM36力场文件**  [CHARMM主页](http://mackerell.umaryland.edu/charmm_ff.shtml)  [CHARMM下载 ](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+   Python 2.x 或 Python 3.x
+   NetworkX 1.11 或 NetworkX 2.3
+   转换文件
+   [cgenff_charmm2gmx_py2_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py2.py) Python 2.x, NetworkX 1.11
+   [cgenff_charmm2gmx_py3_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx1.py) Python 3.x, NetworkX 1.11
+   [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
+</code></pre>
+<h2 id="使用方法">使用方法</h2>
+<h1 id="制作cgenff可识别的str文件">制作CGenFF可识别的.str文件</h1>
+<pre><code>   - 制作.mol2格式的坐标文件，氢原子也包含在内。最好使用Open Babel软件进行转换。
+   - 在CGenFF网站上传.mol2文件，此处有三个复选框：
+      Guess bond orders from connectivity
+      Include parameters that are already in CGenFF
+      Use CGenFF legacy v1.0
+    一般情况下都不用选。选项意义如字面所言。选项一重新判断键价，有一定概率出错，如果时用于其他软件的拓扑，不用选择。选项二会将原力场中已包含的信息一并列出，在后续格式转换的过程中可能会出现重复。
+</code></pre>
+<p>.str文件中会有一个penalty值，该值小于10表明结果较好，在10到50之间则说明需要进行一定的验证，大于50则需要更广泛的验证。</p>
+<h2 id="转换为gromacs格式">转换为GROMACS格式</h2>
+<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+     程序运行命令为
+     `python cgenff_charmm2gmx_py3_nx2.py RESNAME *.mol2 *.str charmm.ff`
+     **RESNAME** 为残基名称，在 .str 文件中见“XXX 0.000!”字段中的XXX
+     *.mol2 为 .mol2 文件
+     *.str 为 .str 文件
+     charmm36 为立场文件夹名称
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[GROMACS建模常用命令]]></title>
-        <id>https://zunhowchem.github.io/post/gromacs-jian-mo-chang-yong-ming-ling/</id>
-        <link href="https://zunhowchem.github.io/post/gromacs-jian-mo-chang-yong-ming-ling/">
+        <id>https://zunhowchem.github.io/post/1/</id>
+        <link href="https://zunhowchem.github.io/post/1/">
         </link>
         <updated>2021-01-04T14:01:10.000Z</updated>
         <summary type="html"><![CDATA[<pre><code>   由于近期在构建分子动力学模型时经常翻教程查找命令从而耽误不少时间，故将建模常用命令总结与此，也会更新学会的新的命令。
@@ -63,38 +107,6 @@
    [-nq &lt;int&gt;]（-1）：阴离子电荷数
     [-[no]neutral] ：加入适量的单原子离子使系统呈电中性
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://zunhowchem.github.io/post/hello-gridea/</id>
-        <link href="https://zunhowchem.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
