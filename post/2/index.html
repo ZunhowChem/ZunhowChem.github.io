@@ -6,7 +6,7 @@
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
 <title>CGenFF产生小分子CHARMM力场拓扑文件 | Zunhow&#39;s Blog</title>
-<link rel="shortcut icon" href="https://zunhowchem.github.io/favicon.ico?v=1609854128187">
+<link rel="shortcut icon" href="https://zunhowchem.github.io/favicon.ico?v=1609939540438">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link rel="stylesheet" href="https://zunhowchem.github.io/styles/main.css" type='text/css' media='all'>
 
@@ -154,7 +154,7 @@
    转换文件
    [cgenff_charmm2gmx_py2_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py2.py) Python 2.x, NetworkX 1.11
    [cgenff_charmm2gmx_py3_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx1.py) Python 3.x, NetworkX 1.11
-   [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
+   [cgenff_charmm2gmx_py3_nx2.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
 </code></pre>
 <h2 id="使用方法">使用方法</h2>
 <h1 id="制作cgenff可识别的str文件">制作CGenFF可识别的.str文件</h1>
@@ -167,7 +167,7 @@
 </code></pre>
 <p>.str文件中会有一个penalty值，该值小于10表明结果较好，在10到50之间则说明需要进行一定的验证，大于50则需要更广泛的验证。</p>
 <h2 id="转换为gromacs格式">转换为GROMACS格式</h2>
-<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
      程序运行命令为
      `python cgenff_charmm2gmx_py3_nx2.py RESNAME *.mol2 *.str charmm.ff`
      **RESNAME** 为残基名称，在 .str 文件中见“XXX 0.000!”字段中的XXX
@@ -197,7 +197,7 @@
           </div>
           <div class="author-meta">
             <div class="author">
-              <img alt='' src="https://zunhowchem.github.io/images/avatar.png?v=1609854128187" class='avatar avatar-72 photo' height='72' width='72'>
+              <img alt='' src="https://zunhowchem.github.io/images/avatar.png?v=1609939540438" class='avatar avatar-72 photo' height='72' width='72'>
               <span>WRITTEN BY: &nbsp;&nbsp;&nbsp;<a href='https://zunhowchem.github.io'></a> </span>
             </div>
             <div class="bio">

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zunhowchem.github.io</id>
     <title>Zunhow&apos;s Blog</title>
-    <updated>2021-01-05T13:42:14.477Z</updated>
+    <updated>2021-01-06T13:25:43.865Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zunhowchem.github.io"/>
     <link rel="self" href="https://zunhowchem.github.io/atom.xml"/>
@@ -31,7 +31,7 @@
    转换文件
    [cgenff_charmm2gmx_py2_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py2.py) Python 2.x, NetworkX 1.11
    [cgenff_charmm2gmx_py3_nx1.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx1.py) Python 3.x, NetworkX 1.11
-   [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
+   [cgenff_charmm2gmx_py3_nx2.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) Python 3.x, NetworkX 2.3
 </code></pre>
 <h2 id="使用方法">使用方法</h2>
 <h1 id="制作cgenff可识别的str文件">制作CGenFF可识别的.str文件</h1>
@@ -44,7 +44,7 @@
 </code></pre>
 <p>.str文件中会有一个penalty值，该值小于10表明结果较好，在10到50之间则说明需要进行一定的验证，大于50则需要更广泛的验证。</p>
 <h2 id="转换为gromacs格式">转换为GROMACS格式</h2>
-<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py] (http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
+<pre><code>     格式转换需要用到 [cgenff_charmm2gmx_py3_nx2.py](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py)，同时需要预先下载好GROMACS可用的[CHARMM力场](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/charmm36-jul2020.ff.tgz)
      程序运行命令为
      `python cgenff_charmm2gmx_py3_nx2.py RESNAME *.mol2 *.str charmm.ff`
      **RESNAME** 为残基名称，在 .str 文件中见“XXX 0.000!”字段中的XXX
